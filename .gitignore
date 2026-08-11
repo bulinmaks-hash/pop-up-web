@@ -1,0 +1,26 @@
+node_modules/
+dist/
+
+# Local tooling and temporary files
+.omx/
+.openai/
+tmp/
+worker/
+*.log
+
+# Local reference material and visual QA output
+reference-memes/
+reference-video/
+implementation-*.png
+design-reference.png
+reference-adopt.png
+
+# Environment and editor files
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
