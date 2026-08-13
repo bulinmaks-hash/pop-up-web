@@ -59,35 +59,94 @@
   .product-image .popup-subject{filter:drop-shadow(0 10px 6px #0006)}
 }
 
-/* Main-page Gatsby card follows the reference: cover opens, then the toast die-cut rises from the lower fold. */
+/* Physical reverse V-fold with one fixed light source above and to the left. */
 .hero .hero-popup{
   position:relative;
-  overflow:hidden;
+  overflow:visible;
   isolation:isolate;
-  perspective:1500px;
-  background:#ebe7df;
-  cursor:pointer;
+  perspective:1800px;
+  background:transparent;
+  transform-style:preserve-3d;
 }
-.hero .hero-popup:focus-visible{
-  outline:3px solid var(--lav);
-  outline-offset:4px;
-}
-.hero .hero-popup .hero-backdrop{
+.hero .hero-popup .hero-book{
   position:absolute;
   left:50%;
   top:50%;
   z-index:1;
-  width:88%;
+  width:78%;
   height:78%;
-  padding:6%;
+  display:block;
+  transform:translate(-50%,-50%);
+  transform-style:preserve-3d;
+}
+.hero .hero-popup .hero-page{
+  position:absolute;
+  top:0;
+  width:calc(50% + .75px);
+  height:100%;
+  display:block;
+  overflow:hidden;
+  background:#fffefb url(/assets/white-craft-paper.png) center/cover;
+  backface-visibility:hidden;
+  transition:transform .1s linear,box-shadow .1s linear;
+  will-change:transform;
+}
+.hero .hero-popup .hero-page::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+}
+.hero .hero-popup .hero-page-left{
+  left:0;
+  z-index:2;
+  transform-origin:right center;
+  transform:rotateY(var(--hero-left-fold));
+  box-shadow:-14px 22px 38px #2d241b22,inset -12px 0 18px -18px #2d241b66;
+}
+.hero .hero-popup .hero-page-left::after{
+  background:radial-gradient(circle at 18% 10%,rgb(255 251 230 / var(--hero-page-highlight)),transparent 52%);
+}
+.hero .hero-popup .hero-page-right{
+  right:0;
+  z-index:1;
+  transform-origin:left center;
+  transform:rotateY(var(--hero-right-fold));
+  box-shadow:14px 22px 38px #2d241b22,inset 12px 0 18px -18px #2d241b66;
+}
+.hero .hero-popup .hero-page-right::after{
+  background:linear-gradient(90deg,rgb(28 20 15 / calc(var(--hero-page-right-shade) * .55)),rgb(28 20 15 / var(--hero-page-right-shade)));
+}
+.hero .hero-popup .hero-page>img{
+  position:absolute;
+  top:0;
+  width:calc(200% - 1.5px);
+  max-width:none;
+  height:100%;
+  padding:10.5% 10.5% 7.5%;
   object-fit:cover;
-  background:#f7f5ef url(/assets/white-craft-paper.png) center/cover;
-  border:1px solid #d8d0c4;
-  box-shadow:0 18px 30px #0003;
-  opacity:0;
-  transform:translate(-50%,-50%) scaleX(.5) scale(.96);
+  background:#fffefb url(/assets/white-craft-paper.png) center/cover;
+  background-blend-mode:screen;
+  transform:none!important;
+  box-shadow:none!important;
+}
+.hero .hero-popup .hero-page-left>img{left:0}
+.hero .hero-popup .hero-page-right>img{right:0}
+.hero .hero-popup .hero-subject-cast-shadow{
+  position:absolute;
+  left:50%;
+  top:81%;
+  z-index:2;
+  width:var(--hero-cast-shadow-width);
+  height:5%;
+  display:block;
+  opacity:var(--hero-cast-shadow-opacity);
+  background:radial-gradient(ellipse,rgb(22 16 11 / .8),transparent 68%);
+  transform:translateX(calc(-50% + var(--hero-cast-shadow-x)));
+  filter:blur(var(--hero-cast-shadow-blur));
   transform-origin:center;
-  transition:transform .78s cubic-bezier(.2,.75,.18,1),opacity .24s ease;
+  pointer-events:none;
 }
 .hero .hero-popup .hero-subject{
   position:absolute;
@@ -96,56 +155,83 @@
   z-index:3;
   width:48%;
   height:72%;
+  display:block;
+  transform:translate(-50%,-55%);
+  transform-origin:50% 88%;
+  transform-style:preserve-3d;
+  box-shadow:none!important;
+}
+.hero .hero-popup .hero-subject-half{
+  position:absolute;
+  top:0;
+  width:calc(50% + .75px);
+  height:100%;
+  display:block;
+  overflow:hidden;
+  backface-visibility:hidden;
+  transform-style:preserve-3d;
+  transition:transform .1s linear;
+  will-change:transform;
+}
+.hero .hero-popup .hero-subject-half>img{
+  position:absolute;
+  top:0;
+  width:calc(200% - 1.5px);
+  max-width:none;
+  height:100%;
   object-fit:contain;
   object-position:center bottom;
-  opacity:0;
-  transform:translate(-50%,-8%) rotateX(82deg) scale(.68);
-  transform-origin:50% 88%;
-  filter:drop-shadow(0 4px 2px #0000);
-  transition:transform .7s cubic-bezier(.16,.84,.2,1) .22s,opacity .18s ease .22s,filter .42s ease .22s;
+  transform:none!important;
+  filter:none!important;
 }
-.hero .hero-popup .hero-cover{
+.hero .hero-popup .hero-subject-half::after{
+  content:"";
   position:absolute;
-  left:50%;
-  top:50%;
-  z-index:4;
-  width:43%;
-  height:78%;
-  background:#fff url(/assets/white-craft-paper.png) center/cover;
-  border:1px solid #d8d0c4;
-  box-shadow:0 18px 28px #0003;
-  transform:translate(-50%,-50%);
-  transform-origin:left center;
-  transition:transform .78s cubic-bezier(.2,.75,.18,1),opacity .24s ease .48s,box-shadow .45s ease;
-}
-.hero .hero-popup:hover .hero-backdrop,
-.hero .hero-popup:focus .hero-backdrop{
-  opacity:1;
-  transform:translate(-50%,-50%) scaleX(1) scale(1);
-}
-.hero .hero-popup:hover .hero-subject,
-.hero .hero-popup:focus .hero-subject{
-  opacity:1;
-  transform:translate(-50%,-54%) rotateX(0) scale(1);
-  filter:drop-shadow(0 18px 10px #0008);
-}
-.hero .hero-popup:hover .hero-cover,
-.hero .hero-popup:focus .hero-cover{
-  opacity:0;
-  transform:translate(-50%,-50%) rotateY(-86deg) scale(.95);
-  box-shadow:18px 8px 22px #0003;
+  inset:0;
+  z-index:2;
   pointer-events:none;
+  -webkit-mask-image:url(/assets/hero-gatsby-subject-retouched.png);
+  mask-image:url(/assets/hero-gatsby-subject-retouched.png);
+  -webkit-mask-size:calc(200% - 1.5px) 100%;
+  mask-size:calc(200% - 1.5px) 100%;
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
 }
-.hero .hero-popup:hover img,
-.hero .hero-popup:focus img{
-  box-shadow:none;
+.hero .hero-popup .hero-subject-left{
+  left:0;
+  z-index:2;
+  transform-origin:right center;
+  transform:rotateY(var(--hero-subject-left-fold));
+}
+.hero .hero-popup .hero-subject-left>img{left:0}
+.hero .hero-popup .hero-subject-left::after{
+  -webkit-mask-position:left bottom;
+  mask-position:left bottom;
+  background:radial-gradient(circle at 24% 13%,rgb(255 244 214 / var(--hero-subject-highlight)),transparent 52%);
+}
+.hero .hero-popup .hero-subject-right{
+  right:0;
+  z-index:1;
+  transform-origin:left center;
+  transform:rotateY(var(--hero-subject-right-fold));
+}
+.hero .hero-popup .hero-subject-right>img{right:0}
+.hero .hero-popup .hero-subject-right::after{
+  -webkit-mask-position:right bottom;
+  mask-position:right bottom;
+  background:linear-gradient(90deg,rgb(20 14 10 / calc(var(--hero-subject-right-shade) * .5)),rgb(20 14 10 / var(--hero-subject-right-shade)));
 }
 @media(max-width:600px){
-  .hero .hero-popup .hero-subject{width:56%;height:70%}
-  .hero .hero-popup .hero-cover{width:48%}
+  .hero .hero-popup .hero-book{width:92%;height:76%}
+  .hero .hero-popup .hero-subject{width:58%;height:70%}
 }
 @media(prefers-reduced-motion:reduce){
-  .hero .hero-popup .hero-backdrop,
-  .hero .hero-popup .hero-subject,
-  .hero .hero-popup .hero-cover{transition:none}
+  .hero .hero-popup .hero-page,
+  .hero .hero-popup .hero-subject-half{transition:none;will-change:auto}
+}
+@media(min-width:901px){
+  .hero .hero-popup{top:clamp(-70px,-4.8vw,-38px)}
+  .hero .hero-popup .hero-book{width:90%;height:90%}
+  .hero .hero-popup .hero-subject{width:55.4%;height:83%}
+  .hero .hero-popup .hero-subject-cast-shadow{top:88%}
 }

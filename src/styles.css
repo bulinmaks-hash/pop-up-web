@@ -55,3 +55,60 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(-
 
 /* Product-specific pop-up crops keep the full main subject on the moving paper piece. */
 .product-image .card-cat .popup-subject,.product-image .card-cat .popup-well{width:60%;height:70%}.product-image .card-cat .popup-subject>img{object-position:54% 50%;transform:scale(1.02)}.product-image .card-musya .popup-subject,.product-image .card-musya .popup-well{width:54%;height:68%}.product-image .card-musya .popup-subject>img{object-position:50% 52%;transform:scale(1.12)}.product-image .inside-spread>img{filter:saturate(.82) brightness(.94)!important}.product-image .popup-subject>img{filter:saturate(1.08) contrast(1.03)!important}
+.floating-cart{
+  position:fixed;
+  right:max(20px,env(safe-area-inset-right));
+  bottom:max(20px,env(safe-area-inset-bottom));
+  z-index:29;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  min-width:154px;
+  min-height:58px;
+  padding:10px 10px 10px 17px;
+  border:1px solid var(--ink);
+  background:var(--acid);
+  color:var(--ink);
+  font-family:inherit;
+  font-size:.82rem;
+  font-weight:800;
+  line-height:1;
+  text-transform:uppercase;
+  box-shadow:6px 6px 0 var(--ink);
+  cursor:pointer;
+  transition:transform .16s ease,box-shadow .16s ease;
+}
+.floating-cart:hover{
+  transform:translate(-2px,-2px);
+  box-shadow:8px 8px 0 var(--ink);
+}
+.floating-cart:active{
+  transform:translate(2px,2px);
+  box-shadow:3px 3px 0 var(--ink);
+}
+.floating-cart:focus-visible{
+  outline:3px solid var(--lav);
+  outline-offset:4px;
+}
+.floating-cart-count{
+  display:grid;
+  place-items:center;
+  min-width:34px;
+  height:34px;
+  padding:0 8px;
+  background:var(--ink);
+  color:#fff;
+  font-size:.9rem;
+}
+@media(max-width:600px){
+  .floating-cart{
+    right:max(14px,env(safe-area-inset-right));
+    bottom:max(14px,env(safe-area-inset-bottom));
+    min-width:136px;
+    min-height:52px;
+    padding:8px 8px 8px 14px;
+    box-shadow:5px 5px 0 var(--ink);
+  }
+  .floating-cart-count{height:32px;min-width:32px}
+}

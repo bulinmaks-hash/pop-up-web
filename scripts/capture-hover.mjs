@@ -44,6 +44,7 @@ await send("Emulation.setDeviceMetricsOverride", {
 await send("Page.reload");
 await evaluate("Promise.all([...document.images].map(img => img.complete ? true : new Promise(resolve => { img.onload = img.onerror = resolve })))");
 await new Promise((resolve) => setTimeout(resolve, 900));
+console.log("HERO_ALIGNMENT", await evaluate("(()=>{const h=document.querySelector('.hero h1').getBoundingClientRect();const f=document.querySelector('.hero-popup').getBoundingClientRect();const b=document.querySelector('.hero-book').getBoundingClientRect();return {heading:{top:Math.round(h.top),bottom:Math.round(h.bottom),center:Math.round((h.top+h.bottom)/2)},figure:{top:Math.round(f.top),bottom:Math.round(f.bottom),center:Math.round((f.top+f.bottom)/2)},card:{top:Math.round(b.top),bottom:Math.round(b.bottom),center:Math.round((b.top+b.bottom)/2)}}})()"));
 await evaluate("window.scrollTo(0,0)");
 await new Promise((resolve) => setTimeout(resolve, 250));
 await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: 1400, y: 20 });
@@ -62,6 +63,20 @@ const heroOpen = await send("Page.captureScreenshot", {
   captureBeyondViewport: false,
 });
 writeFileSync("implementation-hero-open.png", Buffer.from(heroOpen.data, "base64"));
+await evaluate("document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,320)");
+await new Promise((resolve) => setTimeout(resolve, 260));
+const heroFolded = await send("Page.captureScreenshot", {
+  format: "png",
+  fromSurface: true,
+  captureBeyondViewport: false,
+});
+writeFileSync("implementation-hero-folded.png", Buffer.from(heroFolded.data, "base64"));
+await evaluate("window.scrollTo(0,Math.max(0,document.querySelector('.hero-popup').getBoundingClientRect().bottom+scrollY-100))");
+await new Promise((resolve) => setTimeout(resolve, 260));
+const heroExit = await send("Page.captureScreenshot", { format: "png", fromSurface: true, captureBeyondViewport: false });
+writeFileSync("implementation-hero-exit.png", Buffer.from(heroExit.data, "base64"));
+await evaluate("window.scrollTo(0,0)");
+await new Promise((resolve) => setTimeout(resolve, 260));
 await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: 1400, y: 20 });
 await evaluate("document.querySelector('#catalog').scrollIntoView({block:'start'})");
 await new Promise((resolve) => setTimeout(resolve, 250));
