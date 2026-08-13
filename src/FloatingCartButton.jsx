@@ -1,4 +1,6 @@
 export function FloatingCartButton({ count, onOpen }) {
+  if (count < 1) return null;
+
   return (
     <button
       className="floating-cart"

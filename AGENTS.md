@@ -15,6 +15,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Memepedia's Memoteka is a theme and naming reference. Product art remains an original paper-craft interpretation unless rights to a specific source image have been cleared for commercial use.
 - Prioritize the 20–35 audience while keeping copy and navigation legible for older shoppers.
 - Hero mechanics follow a physical reverse V-fold: DiCaprio stays anchored to the centre spine and folds vertically into the card; never animate the portrait downward or flatten it with a horizontal-axis rotation.
+- Catalog product cards must use the same scroll-driven reverse V-fold: they unfold as they enter the viewport and fold back as they leave it, with split paper and subject layers, matching angles, and fixed top-left lighting.
 - Use recognizable real memes in the prototype, including the Gatsby/DiCaprio toast as the always-visible hero pop-up, per explicit user direction; keep production rights clearance as a launch risk.
 - Keep the Gatsby/DiCaprio hero cutout high-resolution and free of graphic white outlines; dimensional separation should come from a restrained CSS contact shadow, not a baked halo.
 - Keep the homepage hero stage clean: the card is unlabelled white Whatman paper floating directly over the page with a natural shadow; no beige container or caption. Do not apply filters to the transparent subject or scroll-linked transforms to its parent because they can expose a rectangular compositing layer in some browsers.
@@ -24,5 +25,6 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Hero folds must have no visible slots, white cutout gaps, or drawn vertical stripes; communicate the hinge through plane geometry and broad light falloff, with subpixel overlap at split layers.
 - Map hero closure to the card position in the viewport: keep 160° at the page top and continue smoothly toward a near-closed 2° state until the card bottom exits above the viewport; scrolling upward reverses the same positional curve.
 - Keep the cart as a standalone fixed component at the bottom-right of the viewport on desktop and mobile; do not return its primary trigger to the scrolling header.
+- Keep the fixed cart trigger compact and hidden while the cart is empty; reveal it only after the first item is added.
 - On wide screens, vertically align the visual centre of the hero card with the centre of the main headline; keep the mobile one-column card unshifted.
 - On desktop, size the hero card to 90% of its figure and scale the pop-up subject proportionally while preserving the shared visual centre with the headline.

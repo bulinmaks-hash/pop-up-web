@@ -1,10 +1,42 @@
 import{useState}from"react";
+import{ProductPopup}from"./ProductPopup.jsx";
 export const products=[
 {id:"cat",title:"Кошка с выпученными глазами",copy:"Когда увидел количество рабочих чатов",price:590,occasion:"Работа",image:"/assets/card-winky-memepedia.png",background:"/assets/popup-bg-cat.png",subject:"/assets/popup-subject-cat.png"},
 {id:"penguin",title:"Пингвин идёт к горе",copy:"Для тех, кто всё равно дойдёт",price:590,occasion:"День рождения",image:"/assets/card-penguin-memepedia.png",background:"/assets/popup-bg-penguin.png",subject:"/assets/popup-subject-penguin.png"},
 {id:"musya",title:"Муся, это ты?",copy:"Нет, это не Муся. Но открытка — точно для неё",price:650,occasion:"Отношения",image:"/assets/card-musya-memepedia.png",background:"/assets/popup-bg-musya.png",subject:"/assets/popup-subject-musya.png"}];
 
-export function Products({items,add}){const[saved,setSaved]=useState([]),[opened,setOpened]=useState([]);const toggle=id=>setOpened(s=>s.includes(id)?s.filter(x=>x!==id):[...s,id]);return <div className={"products "+(items.length===1?"single":"")}>{items.map(p=>{const isOpen=opened.includes(p.id);return <article className="product" key={p.id}><button type="button" className={"product-image "+(isOpen?"is-open":"")} aria-expanded={isOpen} aria-label={(isOpen?"Закрыть":"Открыть")+" открытку «"+p.title+"»"} onClick={()=>toggle(p.id)}><span className="occasion">{p.occasion}</span><span className={"card-book card-"+p.id}><span className="inside-spread"><img src={p.background} alt={"Фон внутри открытки «"+p.title+"»"}/></span><span className="popup-subject" aria-hidden="true"><img src={p.subject} alt=""/></span><span className="book-panel book-left"><span className="panel-face cover-inside" aria-hidden="true"/><span className="panel-face cover-front" aria-hidden="true"><span className="cover-brand">БУМБУМАГА</span><span className="cover-name">{p.title}</span><span className="cover-action">Открыть</span></span></span><span className="book-panel book-right"><span className="panel-face cover-back" aria-hidden="true"/></span></span></button><div className="product-title"><h3>{p.title}</h3><strong>{p.price} ₽</strong></div><p>{p.copy}</p><div className="actions"><button className="add" onClick={()=>add(p)}>В корзину</button><button className="save" aria-pressed={saved.includes(p.id)} onClick={()=>setSaved(s=>s.includes(p.id)?s.filter(x=>x!==p.id):[...s,p.id])}>{saved.includes(p.id)?"Сохранено":"Сохранить"}</button></div></article>})}</div>}
+export function Products({ items, add }) {
+  const [saved, setSaved] = useState([]);
+
+  return (
+    <div className={"products " + (items.length === 1 ? "single" : "")}>
+      {items.map((product) => (
+        <article className="product" key={product.id}>
+          <ProductPopup product={product} />
+          <div className="product-title">
+            <h3>{product.title}</h3>
+            <strong>{product.price} ₽</strong>
+          </div>
+          <p>{product.copy}</p>
+          <div className="actions">
+            <button className="add" onClick={() => add(product)}>В корзину</button>
+            <button
+              className="save"
+              aria-pressed={saved.includes(product.id)}
+              onClick={() => setSaved((current) => (
+                current.includes(product.id)
+                  ? current.filter((id) => id !== product.id)
+                  : [...current, product.id]
+              ))}
+            >
+              {saved.includes(product.id) ? "Сохранено" : "Сохранить"}
+            </button>
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
 
 const steps=[
 ["01","Придумываем","Ловим знакомую ситуацию и превращаем её в бумажную шутку.","/assets/process-sketch.png"],

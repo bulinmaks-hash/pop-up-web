@@ -235,3 +235,26 @@
   .hero .hero-popup .hero-subject{width:55.4%;height:83%}
   .hero .hero-popup .hero-subject-cast-shadow{top:88%}
 }
+
+/* Catalog cards use the same scroll-driven reverse V-fold as the hero card. */
+.product-image.product-popup{position:relative;overflow:visible;isolation:isolate;perspective:1400px;background:#eee9df;transform-style:preserve-3d}
+.product-popup .occasion{position:absolute;top:12px;left:12px;z-index:8}
+.product-popup .product-popup-book{position:absolute;left:50%;top:50%;z-index:1;width:88%;height:82%;display:block;padding:0;background:transparent;transform:translate(-50%,-50%);transform-style:preserve-3d;filter:drop-shadow(0 13px 13px #0003)}
+.product-popup .product-popup-page{position:absolute;top:0;width:calc(50% + .75px);height:100%;display:block;overflow:hidden;padding:0;background:#fffefb url(/assets/white-craft-paper.png) center/cover;backface-visibility:hidden;transition:transform .1s linear,box-shadow .1s linear;will-change:transform}
+.product-popup .product-popup-page::after,.product-popup .product-popup-subject-half::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none}
+.product-popup .product-popup-page-left{left:0;z-index:2;transform-origin:right center;transform:rotateY(var(--product-left-fold));box-shadow:-10px 15px 26px #2d241b22,inset -10px 0 15px -16px #2d241b66}
+.product-popup .product-popup-page-left::after{background:radial-gradient(circle at 18% 10%,rgb(255 251 230 / var(--product-page-highlight)),transparent 52%)}
+.product-popup .product-popup-page-right{right:0;z-index:1;transform-origin:left center;transform:rotateY(var(--product-right-fold));box-shadow:10px 15px 26px #2d241b22,inset 10px 0 15px -16px #2d241b66}
+.product-popup .product-popup-page-right::after{background:linear-gradient(90deg,rgb(28 20 15 / calc(var(--product-page-right-shade) * .55)),rgb(28 20 15 / var(--product-page-right-shade)))}
+.product-popup .product-popup-page>img{position:absolute;top:0;width:calc(200% - 1.5px);max-width:none;height:100%;padding:8%;object-fit:cover;background:#fffefb url(/assets/white-craft-paper.png) center/cover;transform:none!important;filter:saturate(.88) brightness(.96)!important;box-shadow:none!important}
+.product-popup .product-popup-page-left>img{left:0}.product-popup .product-popup-page-right>img{right:0}
+.product-popup .product-popup-cast-shadow{position:absolute;left:50%;top:82%;z-index:2;width:var(--product-cast-shadow-width);height:5%;display:block;padding:0;opacity:var(--product-cast-shadow-opacity);background:radial-gradient(ellipse,rgb(22 16 11 / .8),transparent 68%);transform:translateX(calc(-50% + var(--product-cast-shadow-x)));filter:blur(var(--product-cast-shadow-blur));pointer-events:none}
+.product-popup .product-popup-subject{position:absolute;left:50%;top:54%;z-index:3;width:48%;height:70%;display:block;padding:0;background:transparent;transform:translate(-50%,-55%);transform-origin:50% 88%;transform-style:preserve-3d;box-shadow:none!important}
+.product-popup-penguin .product-popup-subject{width:27%;height:68%}.product-popup-musya .product-popup-subject{width:52%;height:68%}.product-popup-cat .product-popup-subject{width:44%;height:72%}
+.product-popup .product-popup-subject-half{position:absolute;top:0;width:calc(50% + .75px);height:100%;display:block;overflow:hidden;padding:0;background:transparent;backface-visibility:hidden;transform-style:preserve-3d;transition:transform .1s linear;will-change:transform}
+.product-popup .product-popup-subject-half>img{position:absolute;top:0;width:calc(200% - 1.5px);max-width:none;height:100%;object-fit:contain;object-position:center bottom;transform:none!important;filter:none!important}
+.product-popup .product-popup-subject-half::after{-webkit-mask-image:var(--product-subject-image);mask-image:var(--product-subject-image);-webkit-mask-size:calc(200% - 1.5px) 100%;mask-size:calc(200% - 1.5px) 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.product-popup .product-popup-subject-left{left:0;z-index:2;transform-origin:right center;transform:rotateY(var(--product-subject-left-fold))}.product-popup .product-popup-subject-left>img{left:0}.product-popup .product-popup-subject-left::after{-webkit-mask-position:left bottom;mask-position:left bottom;background:radial-gradient(circle at 24% 13%,rgb(255 244 214 / var(--product-subject-highlight)),transparent 52%)}
+.product-popup .product-popup-subject-right{right:0;z-index:1;transform-origin:left center;transform:rotateY(var(--product-subject-right-fold))}.product-popup .product-popup-subject-right>img{right:0}.product-popup .product-popup-subject-right::after{-webkit-mask-position:right bottom;mask-position:right bottom;background:linear-gradient(90deg,rgb(20 14 10 / calc(var(--product-subject-right-shade) * .5)),rgb(20 14 10 / var(--product-subject-right-shade)))}
+@media(hover:hover) and (pointer:fine){.product:hover .product-image.product-popup{transform:none;box-shadow:0 13px 28px #0005}.product:hover .product-popup img{transform:none!important}}
+@media(prefers-reduced-motion:reduce){.product-popup .product-popup-page,.product-popup .product-popup-subject-half{transition:none;will-change:auto}}
