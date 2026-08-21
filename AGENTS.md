@@ -10,6 +10,10 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 
 ## Durable design decisions
 
+- Use “BULIN × БУМБУМАГА” as the primary brand lockup across the header, footer, metadata, and copyright; keep the multiplication sign as a subtle lavender collaboration accent.
+- Structure the landing-page sales path around one honest purchase goal: AIDA/StoryBrand progression from a clear gift problem to product selection, craft proof, purchase-risk reduction, and a repeated catalog CTA; use LIFT to remove distracting secondary actions, and never fabricate reviews, countdowns, scarcity, or operational promises.
+- Keep the “Начните с общей шутки” value bridge visually dense on wide screens: use one real physical-card image between the message and the three-step explanation instead of leaving a large empty centre corridor.
+- Animate the final CTA on every viewport re-entry with an Apple-keynote-style depth reveal: fly the three headline lines forward with scale and restrained blur, then reveal the button and proof note; reset after the section leaves the viewport, and keep a fully static state for reduced-motion users.
 - Use the restrained version of concept 2: editorial black/off-white foundation, one acid-lime action color, subtle lavender accents, large condensed typography, tactile pop-up card photography, and generous whitespace.
 - Keep the page intentionally uncluttered: no vertical-caption overload, giant decorative background words, nested containers, gradients, rounded dashboard cards, or unnecessary badges.
 - Memepedia's Memoteka is a theme and naming reference. Product art remains an original paper-craft interpretation unless rights to a specific source image have been cleared for commercial use.
@@ -28,3 +32,11 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Keep the fixed cart trigger compact and hidden while the cart is empty; reveal it only after the first item is added.
 - On wide screens, vertically align the visual centre of the hero card with the centre of the main headline; keep the mobile one-column card unshifted.
 - On desktop, size the hero card to 90% of its figure and scale the pop-up subject proportionally while preserving the shared visual centre with the headline.
+- Animate the lavender × in the BULIN × БУМБУМАГА wordmark whenever it re-enters the viewport: a fast blurred spin-in that resolves crisply and stops; keep it static for reduced-motion users.
+- Animate the hero copy as a repeatable kinetic-type sequence on viewport entry: headline lines assemble from alternating directions, then the lead, primary CTA, and proof points follow; keep the pop-up card as the dominant physical motion and preserve a static reduced-motion state.
+- Keep the footer email input focus ring inside the field so it never overlaps the adjacent subscribe button.
+- Animated display headlines must preserve Cyrillic diacritics: reveal masks need extra vertical bleed so marks such as the breve in Й are never clipped.
+- Keep extra internal leading between the wrapped “МЕМ,” and “КОТОРЫЙ” rows so the comma descender never collides with the О; do not loosen the remaining hero headline rows.
+- Keep the catalog heading line-height loose enough that the breve in “СВОЙ” never rises into the “ВЫБЕРИТЕ” row; scope the correction to the catalog heading.
+- Keep a visible black gap between every final CTA headline row so Cyrillic descenders such as Щ never approach the following line; apply the clearance on desktop and mobile without changing font size.
+- Use a glyph-safe 1.06 line-height for all large h2 display headings; final CTA reveal masks need symmetric 0.36em vertical bleed so Cyrillic breve and Щ/Ц descenders are neither clipped nor allowed to collide.
